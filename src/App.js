@@ -1,13 +1,21 @@
 import { useState } from 'react';
 
 function App() {
+  const [meme, setMeme] = useState('');
+  const KEY = 'e02689e09a1d4a98883b2d907ea2c4f2';
+  function getMeme() {
+    fetch(`https://api.humorapi.com/memes/random?api-key=${KEY}`)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }
+
   return (
     <div>
-      <Container />
+      <Container meme={meme} getMeme={getMeme} />
     </div>
   );
 }
-function Container() {
+function Container({ meme, getMeme }) {
   const [topTitle, setTopTitle] = useState('');
   const [bottomTitle, setBottomTitle] = useState('');
   return (
@@ -19,8 +27,8 @@ function Container() {
         bottomTitle={bottomTitle}
         setBottomTitle={setBottomTitle}
       />
-      <Button />
-      <MemeImage topTitle={topTitle} bottomTitle={bottomTitle} />
+      <Button getMeme={getMeme} />
+      <MemeImage topTitle={topTitle} bottomTitle={bottomTitle} meme={meme} />
     </div>
   );
 }
@@ -42,7 +50,7 @@ function Content({ topTitle, setTopTitle, setBottomTitle, bottomTitle }) {
         />
       </div>
       <div>
-        <Label text="Buttom Text" />
+        <Label text="Bottom Text" />
         <input
           className="input-field"
           placeholder="Walk into Mordor"
@@ -59,21 +67,54 @@ function Label({ text }) {
   return <label>{text}</label>;
 }
 
-function Button() {
-  return <button className="button">Get a new meme image</button>;
-}
-function MemeImage({ topTitle, bottomTitle }) {
+function Button({ getMeme }) {
   return (
-    <div className="meme-image">
-      <div className="meme-text">
-        <div>
-          <h2>{topTitle}</h2>
-        </div>
-        <div>
-          <h2>{bottomTitle}</h2>
-        </div>
-      </div>
+    <button className="button" onClick={getMeme}>
+      Get a new meme image
+    </button>
+  );
+}
+function MemeImage({ topTitle, bottomTitle, meme }) {
+  if (!meme) return null;
+
+  return (
+    <div
+      className="meme-image"
+      style={{
+        position: 'relative',
+        backgroundImage: `url(${meme.url})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '200px',
+        height: '200px',
+        margin: '20px auto',
+        fontWeight: 'bold',
+        textShadow: '2px 2px 5px black',
+      }}
+    >
+      <h2
+        style={{
+          position: 'absolute',
+          top: '10px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        {topTitle}
+      </h2>
+
+      <h2
+        style={{
+          position: 'absolute',
+          bottom: '10px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        {bottomTitle}
+      </h2>
     </div>
   );
 }
+
 export default App;

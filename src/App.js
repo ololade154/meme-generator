@@ -118,58 +118,71 @@
 // }
 //
 // export default App;
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+// function App() {
+//   const [amount, setAmount] = useState(1);
+//   const [fromCur, setFromCur] = useState('EUR');
+//   const [toCur, setToCur] = useState('USD');
+//   const [converted, setConverted] = useState('');
+//   const [isLoading, setIsLoading] = useState(false);
+//   useEffect(() => {
+//     if (fromCur === toCur) {
+//       setConverted(amount);
+//       return;
+//     }
+//     setIsLoading(true);
+//     fetch(
+//       `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCur}&to=${toCur}`
+//     )
+//       .then((res) => res.json())
+//       .then((data) => setConverted(data.rates[toCur]));
+//     setIsLoading(false);
+//   }, [amount, fromCur, toCur]);
+//   return (
+//     <div>
+//       <input
+//         type="text"
+//         value={amount}
+//         onChange={(event) => setAmount(Number(event.target.value))}
+//         disabled={isLoading}
+//       ></input>
+//       <select
+//         value={fromCur}
+//         onChange={(event) => setFromCur(event.target.value)}
+//         disabled={isLoading}
+//       >
+//         <option value="USD">USD</option>
+//         <option value="EUR">EUR</option>
+//         <option value="CAD">CAD</option>
+//         <option value="INR">INR</option>
+//       </select>
+//       <select
+//         value={toCur}
+//         onChange={(event) => setToCur(event.target.value)}
+//         disabled={isLoading}
+//       >
+//         <option value="USD">USD</option>
+//         <option value="EUR">EUR</option>
+//         <option value="CAD">CAD</option>
+//         <option value="INR">INR</option>
+//       </select>
+//       <p>
+//         {converted} {toCur}
+//       </p>
+//     </div>
+//   );
+// }
+// export default App;
+// import CounterOne from './CounterOne';
+import Login from './Login';
+
 function App() {
-  const [amount, setAmount] = useState(1);
-  const [fromCur, setFromCur] = useState('EUR');
-  const [toCur, setToCur] = useState('USD');
-  const [converted, setConverted] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    if (fromCur === toCur) {
-      setConverted(amount);
-      return;
-    }
-    setIsLoading(true);
-    fetch(
-      `https://api.frankfurter.app/latest?amount=${amount}&from=${fromCur}&to=${toCur}`
-    )
-      .then((res) => res.json())
-      .then((data) => setConverted(data.rates[toCur]));
-    setIsLoading(false);
-  }, [amount, fromCur, toCur]);
   return (
     <div>
-      <input
-        type="text"
-        value={amount}
-        onChange={(event) => setAmount(Number(event.target.value))}
-        disabled={isLoading}
-      ></input>
-      <select
-        value={fromCur}
-        onChange={(event) => setFromCur(event.target.value)}
-        disabled={isLoading}
-      >
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="CAD">CAD</option>
-        <option value="INR">INR</option>
-      </select>
-      <select
-        value={toCur}
-        onChange={(event) => setToCur(event.target.value)}
-        disabled={isLoading}
-      >
-        <option value="USD">USD</option>
-        <option value="EUR">EUR</option>
-        <option value="CAD">CAD</option>
-        <option value="INR">INR</option>
-      </select>
-      <p>
-        {converted} {toCur}
-      </p>
+      {/* <CounterOne /> */}
+      <Login />
     </div>
   );
 }
+
 export default App;

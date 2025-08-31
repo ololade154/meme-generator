@@ -175,12 +175,14 @@
 // export default App;
 // import CounterOne from './CounterOne';
 import Login from './Login';
+import CounterTwo from './CounterTwo';
 
 function App() {
   return (
     <div>
       {/* <CounterOne /> */}
       <Login />
+      <CounterTwo />
     </div>
   );
 }
